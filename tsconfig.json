@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["docs/.vitepress/components/*"]
+    }
+  },
+  "include": ["docs/.vitepress/**/*.ts"]
+}
