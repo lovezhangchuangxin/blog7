@@ -1,4 +1,6 @@
 import { defineConfig } from "vitepress";
+import { buildSidebar } from "./utils/sidebar";
+import { DOCS } from "./utils/constant";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -28,6 +30,8 @@ export default defineConfig({
         link: "/rust/index.md",
       },
     ],
+
+    sidebar: buildSidebar(DOCS),
 
     socialLinks: [
       {
