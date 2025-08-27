@@ -55,7 +55,9 @@ export default defineConfig({
   },
   vite: {
     resolve: {
-      alias: {},
+      alias: {
+        "@examples/*": "docs/.vitepress/examples/*",
+      },
     },
   },
 });

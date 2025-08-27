@@ -1,5 +1,8 @@
 ---
 order: 1
+next:
+  text: Node.js Buffer 学习
+  link: ./buffer.md
 ---
 
 # Node.js 学习笔记
