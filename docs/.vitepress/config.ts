@@ -16,6 +16,10 @@ export default defineConfig({
         text: "js",
         items: [
           {
+            text: "javascript",
+            link: "/js/javascript/index.md",
+          },
+          {
             text: "typescript",
             link: "/js/typescript/index.md",
           },
