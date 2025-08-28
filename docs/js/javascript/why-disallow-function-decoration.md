@@ -77,6 +77,46 @@ work = log(work);
 
 综上，由于 JavaScript 语言中各种“提升”的特性，导致函数装饰器很难在各种正常的 js 写法中都完全生效。
 
+## 高阶函数实现装饰器效果
+
+虽然 Js 目前没有函数装饰器，但是可以通过高阶函数实现类似装饰器的效果。
+
+```js
+/**
+ * 组合多个装饰器
+ */
+function compose(original, ...fns) {
+  return fns.reduceRight((acc, fn) => fn(acc), original);
+}
+
+/**
+ * 日志装饰器
+ */
+function log(fn) {
+  return function (...args) {
+    console.log("Calling function:", fn.name);
+    return fn(...args);
+  };
+}
+
+function log2(fn) {
+  return function (...args) {
+    console.log("Calling function:", fn.name);
+    return fn(...args);
+  };
+}
+
+work = compose(work, log, log2);
+function work(a, b) {}
+
+work(1, 2);
+```
+
+依然需要注意：
+
+- 装饰器需要在被装饰的函数之前定义
+- 在函数被装饰之后再使用该函数
+
 ## 参考
 
 - [为什么装饰器不能用于函数？](https://www.bookstack.cn/read/es6-3rd/spilt.3.docs-decorator.md)
