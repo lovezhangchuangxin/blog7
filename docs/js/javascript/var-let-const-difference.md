@@ -108,3 +108,7 @@ console.log(a); // 2
 const b = 1;
 b = 2; // TypeError: Assignment to constant variable.
 ```
+
+## 参考
+
+- [提升](https://developer.mozilla.org/zh-CN/docs/Glossary/Hoisting)
