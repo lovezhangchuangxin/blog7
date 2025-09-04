@@ -2,7 +2,7 @@
 order: 1
 next:
   text: Node.js Buffer 学习
-  link: ./buffer.md
+  link: ./buffer
 ---
 
 # Node.js 学习笔记
