@@ -1,3 +1,7 @@
+---
+order: 2
+---
+
 # var、let、const 区别
 
 ## 作用域
