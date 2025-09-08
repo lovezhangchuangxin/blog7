@@ -94,6 +94,7 @@ println!("{}", sum); // 输出 7
   - `sum`：计算迭代器中所有元素的和。
   - `product`：计算迭代器中所有元素的积。
   - `for_each`：对每个元素执行一个闭包。
+  - `rev`：反转迭代器的顺序。
 - 迭代器适配器：这类方法会返回一个新的迭代器，允许你对原始迭代器进行转换或过滤。例如：
   - `map`：对每个元素应用一个函数，返回一个新的迭代器。
   - `filter`：根据一个条件过滤元素，返回一个新的迭代器。
@@ -103,11 +104,13 @@ println!("{}", sum); // 输出 7
 
 下面是一些常用的迭代器方法示例：
 
-**collect**：收集到集合
+**collect**：收集到集合，注意，`collect` 只能搜集有所有权的迭代器，如果迭代器是不可变引用或可变引用，需要先克隆或解引用。
 
 ```rust
 let v: Vec<i32> = (1..5).collect();
 let set: HashSet<i32> = vec![1, 2, 2, 3].into_iter().collect();
+let v2: Vec<i32> = vec![1, 2, 3].iter().cloned().collect(); // 使用 cloned() 克隆元素
+let v3: Vec<i32> = vec![1, 2, 3].iter().map(|&x| x * 2).collect(); // 使用 map() 转换
 ```
 
 **fold**：累积操作
@@ -146,6 +149,13 @@ if let Some(index) = v.iter().position(|&x| x == 3) {
 ```rust
 let v = vec![1, 2, 3];
 v.iter().for_each(|&x| println!("{}", x));
+```
+
+**rev**：反转迭代器
+
+```rust
+let v = vec![1, 2, 3];
+let rev: Vec<i32> = v.iter().rev().cloned().collect(); // [3, 2, 1]
 ```
 
 **map**：映射转换
