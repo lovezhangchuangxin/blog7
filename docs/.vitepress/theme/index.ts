@@ -4,6 +4,7 @@ import { inBrowser } from "vitepress";
 // @ts-ignore
 import busuanzi from "busuanzi.pure.js";
 import Layout from "./components/Layout.vue";
+import "./index.css";
 
 export default {
   extends: DefaultTheme,
