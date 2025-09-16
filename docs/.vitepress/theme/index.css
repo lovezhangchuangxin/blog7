@@ -10,6 +10,14 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.2;
+  opacity: 0.3;
   pointer-events: none;
 }
+
+/* :root {
+  --vp-sidebar-bg-color: rgba(246, 246, 246, 0.6);
+  --vp-nav-bg-color: rgba(246, 246, 246, 0.6);
+  --vp-local-nav-bg-color: transparent;
+
+  --vp-c-gutter: rgba(226, 226, 226, 0.8);
+} */
