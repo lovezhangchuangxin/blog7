@@ -8,6 +8,8 @@ export default defineConfig({
   title: "My Personal Blog",
   description: "个人博客",
   head: [["link", { rel: "icon", href: "aqing.ico" }]],
+  // 设置默认为 dark 模式
+  appearance: "dark",
   themeConfig: {
     logo: "/aqing.ico",
     // https://vitepress.dev/reference/default-theme-config
