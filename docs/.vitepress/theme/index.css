@@ -14,10 +14,20 @@ body::before {
   pointer-events: none;
 }
 
-/* :root {
+:root {
+  --vp-code-block-bg: rgba(238, 239, 243, 0.4);
   --vp-sidebar-bg-color: rgba(246, 246, 246, 0.6);
   --vp-nav-bg-color: rgba(246, 246, 246, 0.6);
-  --vp-local-nav-bg-color: transparent;
-
   --vp-c-gutter: rgba(226, 226, 226, 0.8);
-} */
+  --vp-local-nav-bg-color: rgba(246, 246, 246, 0.6);
+  --vp-c-divider: rgba(184, 178, 209, 0.8);
+}
+
+:root.dark {
+  --vp-code-block-bg: rgba(30, 30, 40, 0.6);
+  --vp-sidebar-bg-color: rgba(30, 30, 40, 0.6);
+  --vp-nav-bg-color: rgba(30, 30, 40, 0.6);
+  --vp-c-gutter: rgba(50, 50, 70, 0.8);
+  --vp-local-nav-bg-color: rgba(30, 30, 40, 0.6);
+  --vp-c-divider: rgba(103, 100, 132, 0.8);
+}
