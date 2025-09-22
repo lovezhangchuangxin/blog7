@@ -61,7 +61,7 @@ fn main() {
 
 对于实现了 `Default` trait 的结构体，可以使用 `..Default::default()` 语法来初始化结构体的部分字段，而其他字段则使用默认值：
 
-````rust
+```rust
 #[derive(Default)]
 struct MyStruct {
     a: i32,
@@ -89,7 +89,7 @@ enum MyEnum {
     VariantA,
     VariantB,
 }
-````
+```
 
 也可以手动实现 `Default` trait：
 
@@ -111,6 +111,10 @@ impl Default for MyEnum {
 - [Sized 与 ?Sized](https://rust.biofan.org/common-traits/sized.html)
 - [Default trait](https://rust.biofan.org/common-traits/default.html)
 - [Trait std::default::Default](https://rustwiki.org/zh-CN/std/default/trait.Default.html)
+
+```
+
+```
 
 ```
 
