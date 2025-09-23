@@ -35,6 +35,10 @@ export default defineConfig({
         text: "rust",
         link: "/rust/index.md",
       },
+      {
+        text: "友链",
+        link: "/friends.md",
+      },
     ],
 
     sidebar: buildSidebar(DOCS),
