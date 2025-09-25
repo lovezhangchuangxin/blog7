@@ -96,6 +96,8 @@ pub trait Drop {
 
 `Drop` trait 只有一个方法 `drop`，它在值离开作用域时被调用，用于释放资源。Rust 会自动为所有类型实现 `Drop` trait，包括内置类型和自定义类型。当然你也可以为自定义类型覆盖默认的实现。
 
+TODO: `drop` 方法怎么是接受 `&mut self` 而不是 `self` 呢？
+
 ### Drop trait 的顺序
 
 ```rust
