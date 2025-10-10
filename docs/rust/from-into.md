@@ -109,3 +109,39 @@ fn main() {
     assert_eq!(result, Err(()));
 }
 ```
+
+## 自动错误转换
+
+`From` trait 可以和 `?` 运算符一起使用实现错误类型的自动转换
+
+```rust
+#[derive(Debug)]
+enum MyError {
+    Io(std::io::Error),
+    Parse(std::num::ParseIntError),
+}
+
+impl From<std::io::Error> for MyError {
+    fn from(err: std::io::Error) -> Self {
+        MyError::Io(err)
+    }
+}
+
+impl From<std::num::ParseIntError> for MyError {
+    fn from(err: std::num::ParseIntError) -> Self {
+        MyError::Parse(err)
+    }
+}
+
+fn read_and_parse() -> Result<i32, MyError> {
+    let content = std::fs::read_to_string("number.txt")?; // io::Error → MyError
+    let number: i32 = content.trim().parse()?;           // ParseIntError → MyError
+    Ok(number)
+}
+```
+
+上面代码中，两次 ? 的使用分别可能返回 io::Error 和 std::num::ParseIntError。由于 MyError 实现了 From<io::Error> 和 From<std::num::ParseIntError>，因此我们可以使用 ? 运算符自动将错误转换为 MyError。
+
+## 参考
+
+- [From 和 Into](https://rustwiki.org/zh-CN/rust-by-example/conversion/from_into.html)
