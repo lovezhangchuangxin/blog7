@@ -107,6 +107,93 @@ let owned = cow.into_owned();
 assert_eq!(owned, String::from("foo"));
 ```
 
+## 应用
+
+`Cow` 可以用于处理字符串，避免不必要的拷贝。比如函数的返回值可能是引用也可能拥有数据，这时候可以用 `Cow` 包一下。
+
+```rust
+use std::borrow::Cow;
+
+// 如果输入已经是大写，返回引用；否则创建新的大写字符串
+fn to_uppercase<'a>(s: &'a str) -> Cow<'a, str> {
+    if s.chars().all(|c| c.is_uppercase()) {
+        Cow::Borrowed(s)  // 无需分配新内存
+    } else {
+        Cow::Owned(s.to_uppercase())  // 需要时创建新字符串
+    }
+}
+
+fn main() {
+    let already_upper = "HELLO";
+    let need_upper = "hello";
+
+    let result1 = to_uppercase(already_upper);
+    let result2 = to_uppercase(need_upper);
+
+    println!("{}", result1); // HELLO (无克隆)
+    println!("{}", result2); // HELLO (有克隆)
+}
+```
+
+`Cow` 还可以处理配置数据，使用默认值的引用而不总是拷贝。
+
+```rust
+use std::borrow::Cow;
+
+struct Config<'a> {
+    name: Cow<'a, str>,
+    values: Cow<'a, [i32]>,
+}
+
+impl<'a> Config<'a> {
+    fn new() -> Self {
+        Config {
+            name: Cow::Borrowed("default"),  // 使用静态字符串，无需分配
+            values: Cow::Borrowed(&[]),      // 使用空数组引用
+        }
+    }
+
+    fn with_name(mut self, name: &'a str) -> Self {
+        self.name = Cow::Borrowed(name);
+        self
+    }
+
+    fn with_custom_name(mut self, name: String) -> Self {
+        self.name = Cow::Owned(name);  // 拥有字符串的所有权
+        self
+    }
+}
+```
+
+还可以实现缓存，如果缓存中有数据则返回引用，否则计算并缓存，返回计算值的克隆。
+
+```rust
+use std::borrow::Cow;
+use std::collections::HashMap;
+
+struct Cache<'a> {
+    data: HashMap<String, Cow<'a, str>>,
+}
+
+impl<'a> Cache<'a> {
+    fn new() -> Self {
+        Cache { data: HashMap::new() }
+    }
+
+    fn get_or_compute(&mut self, key: &str) -> Cow<'a, str> {
+        if let Some(cached) = self.data.get(key) {
+            // 返回缓存数据的引用
+            Cow::Borrowed(cached)
+        } else {
+            // 计算新值并存储
+            let computed = format!("computed_{}", key);
+            self.data.insert(key.to_string(), Cow::Owned(computed.clone()));
+            Cow::Owned(computed)
+        }
+    }
+}
+```
+
 ## 参考
 
 - [Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)
